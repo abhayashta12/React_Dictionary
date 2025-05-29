@@ -1,0 +1,47 @@
+[
+  {
+    "term": "useState",
+    "purpose": "A React Hook that lets you add state to functional components.",
+    "why": [
+      "Allows functional components to have local state without using class components",
+      "Provides a clean way to declare and update state variables",
+      "Enables React to re-render components when state changes",
+      "Simplifies state management compared to class component state"
+    ],
+    "example": "A form component that needs to track user input values, such as a text field where you need to store what the user types.",
+    "code": "import { useState } from 'react';\n\nfunction Counter() {\n  const [count, setCount] = useState(0);\n  \n  return (\n    <div>\n      <p>You clicked {count} times</p>\n      <button onClick={() => setCount(count + 1)}>\n        Click me\n      </button>\n    </div>\n  );\n}",
+    "summary": "useState is the fundamental Hook for adding reactive state to functional components.",
+    "createdAt": "2023-05-15T14:23:45.789Z",
+    "moderated": true
+  },
+  {
+    "term": "useEffect",
+    "purpose": "A React Hook that lets you perform side effects in functional components.",
+    "why": [
+      "Handles lifecycle events like componentDidMount, componentDidUpdate, and componentWillUnmount in one place",
+      "Allows performing data fetching, subscriptions, or manual DOM manipulations",
+      "Keeps related logic together, rather than splitting it across lifecycle methods",
+      "Ensures effects run after render, making UI consistent"
+    ],
+    "example": "Fetching data from an API when a component mounts, or subscribing to a WebSocket connection that needs to be closed when the component unmounts.",
+    "code": "import { useState, useEffect } from 'react';\n\nfunction UserProfile({ userId }) {\n  const [user, setUser] = useState(null);\n  \n  useEffect(() => {\n    // This runs after render and when userId changes\n    const fetchData = async () => {\n      const response = await fetch(`/api/users/${userId}`);\n      const data = await response.json();\n      setUser(data);\n    };\n    \n    fetchData();\n    \n    // Optional cleanup function\n    return () => {\n      // Cleanup code here (runs before next effect or unmount)\n    };\n  }, [userId]); // Only re-run if userId changes\n  \n  if (!user) return <div>Loading...</div>;\n  \n  return <div>{user.name}</div>;\n}",
+    "summary": "useEffect connects your component to external systems and handles side effects during the component lifecycle.",
+    "createdAt": "2023-05-15T14:24:15.789Z",
+    "moderated": true
+  },
+  {
+    "term": "props",
+    "purpose": "React's way of passing data from parent to child components.",
+    "why": [
+      "Enables component composition and reusability",
+      "Provides a one-way data flow, making applications more predictable",
+      "Allows parent components to control child component behavior",
+      "Helps maintain separation of concerns between components"
+    ],
+    "example": "A Button component that accepts props like 'label', 'onClick', and 'disabled' to customize its appearance and behavior across different parts of your application.",
+    "code": "// Parent component\nfunction App() {\n  return (\n    <div>\n      <Greeting name=\"Sarah\" age={25} />\n    </div>\n  );\n}\n\n// Child component\nfunction Greeting({ name, age }) {\n  return (\n    <h1>Hello, {name}! You are {age} years old.</h1>\n  );\n}",
+    "summary": "Props are React's mechanism for component communication, allowing parent components to pass data to their children.",
+    "createdAt": "2023-05-15T14:25:00.789Z",
+    "moderated": true
+  }
+]
